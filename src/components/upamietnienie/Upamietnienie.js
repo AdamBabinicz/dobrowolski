@@ -83,7 +83,7 @@ roku, a następnie przy ul. Piotrkowskiej 84
         isOpen={isOpen}
         onClose={closeModal}
         header="Portret z przeszłości"
-        content="Pani Zofia Kaczkowska-Waliszewska jest zafascynowana antykami i dziełami sztuki, ale szczególne uczucie żywi do obrazu przedstawiającego ją sprzed lat. Jak sama podkreśla: 'To jedna z niewielu pamiątek, które przetrwały wojnę - ten portret, sukienka, w której pozowałam, fortepian i... żyrandol. Patrząc na obraz z mojego dzieciństwa sprzed 81 lat, przenoszę się do tamtych szczęśliwych, niewinnych czasów, zanim wybuchła wojna i wszystko się zmieniło.'"
+        content="Zofia Kaczkowska-Waliszewska: 'To jedna z niewielu pamiątek, które przetrwały wojnę - ten portret, sukienka, w której pozowałam, fortepian i... żyrandol. Patrząc na obraz z mojego dzieciństwa sprzed 81 lat, przenoszę się do tamtych szczęśliwych, niewinnych czasów, zanim wybuchła wojna i wszystko się zmieniło.'"
         imgSrc={img}
       />
     </UpamietnieniePageContainer>
