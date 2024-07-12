@@ -1,0 +1,503 @@
+import React from "react";
+import styled from "styled-components";
+
+// Importowanie lokalnych obrazów
+import img1 from "../assets/images/3.jfif";
+import img2 from "../assets/images/4.jfif";
+import img3 from "../assets/images/5.jfif";
+import img4 from "../assets/images/5.jfif";
+
+const ExhibitionsSection = styled.section`
+  padding: 32px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+
+const ExhibitionContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+`;
+
+const ExhibitionImage = styled.img`
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 16px;
+    max-width: 200px;
+    max-height: 100%;
+    object-fit: cover;
+  }
+`;
+const ExhibitionContent = styled.div`
+  flex: 1;
+`;
+
+const ExhibitionTitle = styled.h3`
+  margin-bottom: 8px;
+`;
+
+const ExhibitionDate = styled.p`
+  font-style: italic;
+  margin-bottom: 16px;
+`;
+
+const ExhibitionDescription = styled.p`
+  margin-bottom: 16px;
+`;
+
+const Exhibitions = () => {
+  const exhibitionsData = [
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1947",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego, - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img1,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1948",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego - kontynuacja z 1947 r.",
+      image: img2,
+    },
+    {
+      title:
+        "35 lat pracy artystycznej : Wystawa zbiorowa Wacława Dobrowolskiego",
+      date: "1955",
+      description: "tekst",
+      image: img3,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1967",
+      description:
+        "Wacław Dobrowolski - malarstwo - zorganizowana przez Związek Polskich Artystów Plastyków w Radomiu.",
+      image: img4,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1970",
+      description:
+        "Wacław Dobrowolski 1890-1969 - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img4,
+    },
+  ];
+
+  return (
+    <ExhibitionsSection id="wystawy">
+      <h2>Wystawy</h2>
+      {exhibitionsData.map((exhibition, index) => (
+        <ExhibitionContainer key={index}>
+          <ExhibitionImage src={exhibition.image} alt={exhibition.title} />
+          <ExhibitionContent>
+            <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
+            <ExhibitionDate>{exhibition.date}</ExhibitionDate>
+            <ExhibitionDescription>
+              {exhibition.description}
+            </ExhibitionDescription>
+          </ExhibitionContent>
+        </ExhibitionContainer>
+      ))}
+    </ExhibitionsSection>
+  );
+};
+
+export default Exhibitions;
+
+
+import React from "react";
+import styled from "styled-components";
+
+// Importowanie lokalnych obrazów
+import img1 from "../assets/images/3.jfif";
+import img2 from "../assets/images/4.jfif";
+import img3 from "../assets/images/5.jfif";
+import img4 from "../assets/images/5.jfif";
+
+const ExhibitionsSection = styled.section`
+  padding: 32px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+
+const ExhibitionContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const ExhibitionImage = styled.img`
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: ${({ reverse }) => (reverse ? "0" : "16px")};
+    margin-left: ${({ reverse }) => (reverse ? "16px" : "0")};
+    max-width: 200px;
+    max-height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const ExhibitionContent = styled.div`
+  flex: 1;
+`;
+
+const ExhibitionTitle = styled.h3`
+  margin-bottom: 8px;
+`;
+
+const ExhibitionDate = styled.p`
+  font-style: italic;
+  margin-bottom: 16px;
+`;
+
+const ExhibitionDescription = styled.p`
+  margin-bottom: 16px;
+`;
+
+const Exhibitions = () => {
+  const exhibitionsData = [
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1947",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego, - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img1,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1948",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego - kontynuacja z 1947 r.",
+      image: img2,
+    },
+    {
+      title:
+        "35 lat pracy artystycznej : Wystawa zbiorowa Wacława Dobrowolskiego",
+      date: "1955",
+      description: "tekst",
+      image: img3,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1967",
+      description:
+        "Wacław Dobrowolski - malarstwo - zorganizowana przez Związek Polskich Artystów Plastyków w Radomiu.",
+      image: img4,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1970",
+      description:
+        "Wacław Dobrowolski 1890-1969 - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img4,
+    },
+  ];
+
+  return (
+    <ExhibitionsSection id="wystawy">
+      <h2>Wystawy</h2>
+      {exhibitionsData.map((exhibition, index) => (
+        <ExhibitionContainer key={index} reverse={index % 2 !== 0}>
+          <ExhibitionImage
+            src={exhibition.image}
+            alt={exhibition.title}
+            reverse={index % 2 !== 0}
+          />
+          <ExhibitionContent>
+            <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
+            <ExhibitionDate>{exhibition.date}</ExhibitionDate>
+            <ExhibitionDescription>
+              {exhibition.description}
+            </ExhibitionDescription>
+          </ExhibitionContent>
+        </ExhibitionContainer>
+      ))}
+    </ExhibitionsSection>
+  );
+};
+
+export default Exhibitions;
+
+
+import React from "react";
+import styled from "styled-components";
+
+// Importowanie lokalnych obrazów
+import img1 from "../assets/images/3.jfif";
+import img2 from "../assets/images/4.jfif";
+import img3 from "../assets/images/5.jfif";
+import img4 from "../assets/images/5.jfif";
+
+const ExhibitionsSection = styled.section`
+  padding: 32px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  width: 70%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    width: 100%;
+  }
+`;
+
+const ExhibitionContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const ExhibitionImage = styled.img`
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: ${({ reverse }) => (reverse ? "0" : "16px")};
+    margin-left: ${({ reverse }) => (reverse ? "16px" : "0")};
+    max-width: 200px;
+    max-height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const ExhibitionContent = styled.div`
+  flex: 1;
+`;
+
+const ExhibitionTitle = styled.h3`
+  margin-bottom: 8px;
+`;
+
+const ExhibitionDate = styled.p`
+  font-style: italic;
+  margin-bottom: 16px;
+`;
+
+const ExhibitionDescription = styled.p`
+  margin-bottom: 16px;
+`;
+
+const Exhibitions = () => {
+  const exhibitionsData = [
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1947",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego, - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img1,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1948",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego - kontynuacja z 1947 r.",
+      image: img2,
+    },
+    {
+      title:
+        "35 lat pracy artystycznej : Wystawa zbiorowa Wacława Dobrowolskiego",
+      date: "1955",
+      description: "tekst",
+      image: img3,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1967",
+      description:
+        "Wacław Dobrowolski - malarstwo - zorganizowana przez Związek Polskich Artystów Plastyków w Radomiu.",
+      image: img4,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1970",
+      description:
+        "Wacław Dobrowolski 1890-1969 - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img4,
+    },
+  ];
+
+  return (
+    <ExhibitionsSection id="wystawy">
+      <h2>Wystawy</h2>
+      {exhibitionsData.map((exhibition, index) => (
+        <ExhibitionContainer key={index} reverse={index % 2 !== 0}>
+          <ExhibitionImage
+            src={exhibition.image}
+            alt={exhibition.title}
+            reverse={index % 2 !== 0}
+          />
+          <ExhibitionContent>
+            <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
+            <ExhibitionDate>{exhibition.date}</ExhibitionDate>
+            <ExhibitionDescription>
+              {exhibition.description}
+            </ExhibitionDescription>
+          </ExhibitionContent>
+        </ExhibitionContainer>
+      ))}
+    </ExhibitionsSection>
+  );
+};
+
+export default Exhibitions;
+
+
+import React from "react";
+import styled, {
+  ThemeProvider as StyledThemeProvider,
+} from "styled-components";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Biography from "./components/Biography";
+import Gallery from "./components/Gallery";
+import Exhibitions from "./components/Exhibitions";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import { useTheme, ThemeProvider } from "./ThemeContext";
+import GlobalStyle from "./GlobalStyle";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+
+const lightTheme = {
+  background: "#ffffff",
+  color: "#000000",
+};
+
+const darkTheme = {
+  background: "#000000",
+  color: "#ffffff",
+};
+
+const AppContainer = styled.div`
+  font-family: Arial, sans-serif;
+`;
+
+const AppContent = () => {
+  const { theme } = useTheme();
+
+  return (
+    <StyledThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <ScrollToTopButton />
+      <AppContainer>
+        <Header />
+        <Home />
+        <Biography />
+        <Gallery />
+        <Exhibitions />
+        <Contact />
+        <Footer />
+      </AppContainer>
+    </StyledThemeProvider>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+};
+
+export default App;
+
+
+
+// App.js
+import React from "react";
+import styled, {
+  ThemeProvider as StyledThemeProvider,
+} from "styled-components";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Biography from "./components/Biography";
+import Gallery from "./components/Gallery";
+import Exhibitions from "./components/Exhibitions";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import { useTheme, ThemeProvider } from "./ThemeContext";
+import GlobalStyle from "./GlobalStyle";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+
+const lightTheme = {
+  background: "#ffffff",
+  // altBackground: "#f0f0f0",
+  color: "#000000",
+  // altColor: "#000000",
+};
+
+const darkTheme = {
+  background: "#222222",
+  // altBackground: "#333333",
+  color: "#ffffff",
+  // altColor: "#ffffff",
+};
+
+const AppContainer = styled.div`
+  font-family: Arial, sans-serif;
+`;
+
+const AppContent = () => {
+  const { theme } = useTheme();
+
+  return (
+    <StyledThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <ScrollToTopButton />
+      <AppContainer>
+        <Header />
+        <Home />
+        <Biography />
+        <Gallery />
+        <Exhibitions />
+        <Contact />
+        <Footer />
+      </AppContainer>
+    </StyledThemeProvider>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+};
+
+export default App;

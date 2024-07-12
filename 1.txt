@@ -1,0 +1,516 @@
+import React, { useRef } from "react";
+import styled from "styled-components";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
+import image5 from "../assets/images/5.jpg";
+import image6 from "../assets/images/6.jpg";
+
+const GalleryContainer = styled.section`
+  padding: 32px;
+  background: ${(props) => props.theme.background};
+`;
+
+const Title = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+`;
+
+const ImageGrid = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 16px;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  flex: 0 0 auto;
+  width: calc(100vw - 32px); /* Pełna szerokość ekranu z odjęciem paddingu */
+  max-width: calc(100vw - 32px);
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center; /* Wyśrodkowanie obrazka */
+
+  @media (min-width: 768px) {
+    width: calc(
+      100% / 3 - 16px
+    ); // Trzy obrazy na większych ekranach z marginesem
+    max-width: calc(100% / 3 - 16px);
+  }
+
+  &:hover img {
+    filter: brightness(70%);
+  }
+
+  &:hover div {
+    opacity: 1;
+  }
+`;
+
+const Image = styled.img`
+  object-fit: contain; /* Dopasowanie do kontenera zachowując proporcje */
+  transition: filter 0.3s;
+  width: auto;
+  height: auto;
+  max-width: 100%; /* Maksymalna szerokość */
+  max-height: 70vh; /* Maksymalna wysokość */
+
+  @media (min-width: 768px) {
+    object-fit: cover;
+  }
+`;
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-sizing: border-box;
+`;
+
+const NavigationButton = styled.button`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  border: none;
+  padding: 8px;
+  margin: 0 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: ${(props) => props.theme.hoverBackground};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+const Gallery = () => {
+  const images = [
+    { src: image1, title: "Title 1", year: "2023" },
+    { src: image2, title: "Title 2", year: "2022" },
+    { src: image3, title: "Title 3", year: "2023" },
+    { src: image4, title: "Title 4", year: "2022" },
+    { src: image5, title: "Title 5", year: "2023" },
+    { src: image6, title: "Title 6", year: "2022" },
+  ];
+
+  const scrollRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft -= scrollRef.current.offsetWidth;
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += scrollRef.current.offsetWidth;
+    }
+  };
+
+  return (
+    <GalleryContainer id="obrazy">
+      <Title>Obrazy</Title>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <NavigationButton onClick={scrollLeft}>
+          <FaArrowLeft />
+        </NavigationButton>
+        <ImageGrid ref={scrollRef}>
+          {images.map((image, index) => (
+            <ImageWrapper key={index}>
+              <Image src={image.src} alt={`Artwork ${index + 1}`} />
+              <ImageOverlay>
+                {image.title} - {image.year}
+              </ImageOverlay>
+            </ImageWrapper>
+          ))}
+        </ImageGrid>
+        <NavigationButton onClick={scrollRight}>
+          <FaArrowRight />
+        </NavigationButton>
+      </div>
+    </GalleryContainer>
+  );
+};
+
+export default Gallery;
+
+
+import React from "react";
+import Slider from "react-slick";
+import styled from "styled-components";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
+import image5 from "../assets/images/5.jpg";
+import image6 from "../assets/images/6.jpg";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const GalleryContainer = styled.section`
+  padding: 32px;
+  background: ${(props) => props.theme.background};
+`;
+
+const Title = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+`;
+
+const NavigationButton = styled.button`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  border: none;
+  padding: 8px;
+  margin: 0 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: ${(props) => props.theme.hoverBackground};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+const Gallery = () => {
+  const images = [
+    { src: image1, title: "Title 1", year: "2023" },
+    { src: image2, title: "Title 2", year: "2022" },
+    { src: image3, title: "Title 3", year: "2023" },
+    { src: image4, title: "Title 4", year: "2022" },
+    { src: image5, title: "Title 5", year: "2023" },
+    { src: image6, title: "Title 6", year: "2022" },
+  ];
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+    ],
+  };
+
+  return (
+    <GalleryContainer id="obrazy">
+      <Title>Obrazy</Title>
+      <Slider {...settings}>
+        {images.map((image, index) => (
+          <ImageWrapper key={index}>
+            <Image src={image.src} alt={`Artwork ${index + 1}`} />
+            <ImageOverlay>
+              {image.title} - {image.year}
+            </ImageOverlay>
+          </ImageWrapper>
+        ))}
+      </Slider>
+    </GalleryContainer>
+  );
+};
+
+export default Gallery;
+
+
+import React, { useState, useEffect } from "react";
+import { FaArrowUp } from "react-icons/fa";
+import styled from "styled-components";
+
+const ScrollButton = styled.button`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.color};
+  color: ${(props) => props.theme.background};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: ${(props) => (props.show ? "1" : "0")};
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &:hover {
+    background-color: ${(props) => props.theme.color};
+    color: ${(props) => props.theme.background};
+    box-shadow: 0 0 10px ${(props) => props.theme.color};
+  }
+
+  @media (max-width: 375px) {
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+const ScrollToTopButton = () => {
+  const [showButton, setShowButton] = useState(false);
+
+  const checkScrollTop = () => {
+    if (!showButton && window.scrollY > 150) {
+      setShowButton(true);
+    } else if (showButton && window.scrollY <= 150) {
+      setShowButton(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScrollTop);
+    return () => {
+      window.removeEventListener("scroll", checkScrollTop);
+    };
+  }, [showButton]);
+
+  return (
+    <ScrollButton onClick={scrollToTop} show={showButton}>
+      <FaArrowUp />
+    </ScrollButton>
+  );
+};
+
+export default ScrollToTopButton;
+
+
+
+import React from "react";
+import Slider from "react-slick";
+import styled from "styled-components";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
+import image5 from "../assets/images/5.jpg";
+import image6 from "../assets/images/6.jpg";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const GalleryContainer = styled.section`
+  padding: 32px;
+  background: ${(props) => props.theme.background};
+  position: relative;
+`;
+
+const Title = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+  gap: 2rem;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 768px) {
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+  }
+`;
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    overflow: hidden;
+  }
+`;
+
+const ImageWrapperHover = styled(ImageWrapper)`
+  &:hover ${ImageOverlay} {
+    opacity: 1;
+  }
+`;
+
+const NavigationButton = styled.button`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background 0.3s;
+
+  &:hover {
+    background: ${(props) => props.theme.hoverBackground};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  ${(props) => props.$left && "left: 16px;"}
+  ${(props) => props.$right && "right: 16px;"}
+
+  @media (max-width: 768px) {
+    ${(props) => props.$left && "left: 8px;"}
+    ${(props) => props.$right && "right: 8px;"}
+  }
+`;
+
+const Gallery = () => {
+  const images = [
+    { src: image1, title: "Title 1", year: "2023" },
+    { src: image2, title: "Title 2", year: "2022" },
+    { src: image3, title: "Title 3", year: "2023" },
+    { src: image4, title: "Title 4", year: "2022" },
+    { src: image5, title: "Title 5", year: "2023" },
+    { src: image6, title: "Title 6", year: "2022" },
+  ];
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  return (
+    <GalleryContainer id="gallery-obrazy">
+      <Title>Obrazy</Title>
+      <Slider {...settings}>
+        {images.map((image, index) => (
+          <ImageWrapperHover key={index}>
+            <Image src={image.src} alt={`Artwork ${index + 1}`} />
+            <ImageOverlay>
+              {image.title} - {image.year}
+            </ImageOverlay>
+          </ImageWrapperHover>
+        ))}
+      </Slider>
+      <NavigationButton
+        $left
+        onClick={() => {
+          document.querySelector(".slick-prev").click();
+        }}
+      >
+        <FaArrowLeft />
+      </NavigationButton>
+      <NavigationButton
+        $right
+        onClick={() => {
+          document.querySelector(".slick-next").click();
+        }}
+      >
+        <FaArrowRight />
+      </NavigationButton>
+    </GalleryContainer>
+  );
+};
+
+export default Gallery;

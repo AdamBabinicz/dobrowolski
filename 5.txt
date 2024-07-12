@@ -1,0 +1,233 @@
+Ponad 40 lat był tenorem w chórze Teatru
+Wielkiego w Łodzi, jest synem malarza i pedagoga
+Wacława Dobrowolskiego (1890-1969). 
+Jest pan łodzianinem, ale pana rodzina przybyła do Łodzi
+z dawnych kresów Rzeczypospolitej.
+To prawda, rodzice pochodzą z terenów dzisiejszej Ukrainy. Mama urodziła się w Kijowie, a wychowywała w miejscowości Obodówka w obwodzie winnickim. Podczas wojny
+polsko-bolszewickiej 1920 roku w Obodówce stacjonowało
+wojsko polskie, które ewakuowało mieszkających tam Polaków do centrum odrodzonego kraju, w tym rodzinę mamy.
+Jedna z ciotek dostała pracę w Łodzi i ściągnęła tu moich
+dziadków z mamą. Pierwszy miesiąc spędzili w hotelu
+Savoy na najwyższym piętrze, potem mieszkali m.in. przy
+ul. Gdańskiej i Wólczańskiej. Natomiast mój ojciec, Wacław
+Dobrowolski, pochodził z guberni chersońskiej, w okolicach
+wspomnianej Obodówki, dlatego znał Żmigrodzkich, rodzinę mamy. Jeszcze przed wojną studiował w Szkole Sztuk
+Pięknych w Kijowie oraz w Akademii w Petersburgu, po
+wojennej tułaczce w 1927 roku przyjechał do Łodzi, by po
+kilkumiesięcznej podróży do Włoch i Francji osiąść na stałe.
+Przypomnijmy postać pana ojca, cenionego artysty, pedagoga
+i społecznika, który w okresie międzywojennym wielce zasłużył
+się dla rozwoju życia artystycznego i kulturalnego Łodzi.
+Przede wszystkim tato był wziętym malarzem portrecistą. Co ciekawe, wśród jego modeli byli przedstawiciele
+różnych warstw społecznych; portretował Helenę Geyer,
+marszałka Józefa Piłsudskiego, aktorów występujących
+w łódzkich teatrach, ale też robotników. Jego przejmujący
+realizmem obraz olejny „Chłop” został nagrodzony brązowym medalem w warszawskiej Zachęcie w 1936 roku. Pracownie miał pod różnymi adresami, najdłużej przy ulicy
+Wólczańskiej 35, gdzie mieściła się też
+założona i prowadzona przez niego Szkoła
+Sztuk Pięknych i Przemysłu Artystycznego im. Cypriana Kamila Norwida. Wykładowcami w tej szkole byli m.in. rzeźbiarz
+Zygmunt Kowalewski i malarz Franciszek
+Walczowski, którzy wspólnie z moim
+ojcem od 1932 roku redagowali ogólnopolskie pismo społeczno-artystyczne „Polska Druga”. Dochód
+z jego sprzedaży przeznaczano na pomoc biedniejszym
+studentom w pokryciu kosztów czesnego, które na początku lat 30. wynosiło 20 zł miesięcznie. Z czasem magistrat
+zaczął przyznawać szkole skromne subwencje, nie była
+ona bowiem nigdy dochodowym interesem. Do najbardziej znanych absolwentów szkoły, działającej w latach
+1929-1938 przy ulicy Wólczańskiej 35a, następnie przez
+rok przy Piotrkowskiej 84, należą Lech Kunka i Zygmunt
+Hyży. Warto też wspomnieć, że ojciec mój założył w Łodzi
+grupę artystyczną „Ryngraf”, promującą tradycyjne wartości w sztuce. Był to wyraz protestu przeciwko przyznaniu
+Władysławowi Strzemińskiemu Nagrody Artystycznej Miasta Łodzi w 1932 roku. Grupa była dość aktywna, a pokaz
+prac jej członków odbył się w 1935 roku w Instytucie Propagandy Sztuki w parku Sienkiewicza, dzisiejszej Miejskiej
+Galerii Sztuki w Łodzi. Z pierwszym kierownikiem galerii
+Marianem Dienstlem-Dąbrową Wacław Dobrowolski się
+przyjaźnił i często tam wystawiał swoje prace. Dorobek
+artystyczny ojca z międzywojnia, poza portretami obejmujący też pejzaże, uległ niestety rozproszeniu. W 1940 roku
+tato został internowany do Limanowej, skąd przeniósł się
+do Radomia i tam mieszkał oraz tworzył do śmierci. Dlatego
+chciałem przypomnieć łodzianom jego postać i działalność,
+fundując tablicę odsłoniętą 15 listopada, w 128. rocznicę
+urodzin taty, na murze posesji przy ulicy Wólczańskiej 35.
+Mam też nadzieję, że kiedyś uda się zorganizować w Łodzi
+wystawę jego twórczości, pierwszą po wojnie. Może
+z pomocą łodzian posiadających jego prace?
+Czy odziedziczył pan po ojcu zainteresowania artystyczne?
+W pewnym sensie tak. Tato bardzo lubił grać na pianinie, zatem muzyka była mu także bliska. Ja zaś związałem
+swoje zawodowe losy najpierw z Filharmonia Łódzką, gdzie
+pracowałem krótko za dyrekcji Henryka Czyża, a od 1974 do
+2013 roku z łódzką operą. Dziś, jako aktywny emeryt, biorę udział w różnych przedsięwzięciach muzycznych, np.
+występuję wspólnie z młodym zdolnym pianistą Tomaszem
+Gargólem w Chatce Ech! oraz w kabarecie „Wacław i jego
+ferajna”, działającym przy Domu Kultury Górna. A w wolnych chwilach poszukuję prac ojca oraz nowych informacji
+o jego życiu i twórczości.
+
+Profesor Dobrowolski jest pochowany w Bodzarowie koło Płocka. Na przeciwko, po drugiej stronie Wisły mieszkam ja...
+
+// Exhibitions.js
+import React from "react";
+import styled from "styled-components";
+
+// Importowanie lokalnych obrazów
+import img1 from "../assets/images/3.jfif";
+import img2 from "../assets/images/4.jfif";
+import img3 from "../assets/images/5.jfif";
+import img4 from "../assets/images/5.jfif";
+
+const ExhibitionsSection = styled.section`
+  padding: 32px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+
+const ExhibitionsGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+`;
+
+const ExhibitionItem = styled.div`
+  display: flex;
+  flex: 1 1 calc(50% - 24px);
+  background-color: ${(props) => props.theme.background};
+  padding: 16px;
+  border-radius: 8px;
+
+  @media (max-width: 768px) {
+    flex: 1 1 100%;
+    flex-direction: column;
+  }
+`;
+
+const ExhibitionImage = styled.img`
+  flex: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 16px;
+    width: auto;
+    height: 200px;
+    max-width: 200px;
+    object-fit: cover;
+  }
+`;
+
+const ExhibitionContent = styled.div`
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ExhibitionTitle = styled.h3`
+  margin-bottom: 8px;
+`;
+
+const ExhibitionDate = styled.p`
+  font-style: italic;
+  margin-bottom: 16px;
+`;
+
+const ExhibitionDescription = styled.p`
+  margin-bottom: 16px;
+`;
+
+const Exhibitions = () => {
+  const exhibitionsData = [
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1947",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego, - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img1,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1948",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego - kontynuacja z 1947 r.",
+      image: img2,
+    },
+    {
+      title:
+        "35 lat pracy artystycznej : Wystawa zbiorowa Wacława Dobrowolskiego",
+      date: "1955",
+      description: "tekst",
+      image: img3,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1967",
+      description:
+        "Wacław Dobrowolski - malarstwo - zorganizowana przez Związek Polskich Artystów Plastyków w Radomiu.",
+      image: img4,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1970",
+      description:
+        "Wacław Dobrowolski 1890-1969 - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img4,
+    },
+    {
+      title: "42 Salon Zimowy. Powrót",
+      date: "Radom - 28 lutego – 13 kwietnia 2009 r.",
+      description:
+        "Wystawę rozpoczynają prace dwojga artystów środowiska radomskiego, Wacława Dobrowolskiego i Haliny Krysińskiej, którzy byli założycielami Towarzystwa w 1945 r., uczestniczyli w wielu wystawach,.",
+      image: img4,
+    },
+  ];
+
+  return (
+    <ExhibitionsSection id="wystawy">
+      <h2>Wystawy</h2>
+      <ExhibitionsGrid>
+        {exhibitionsData.map((exhibition, index) => (
+          <ExhibitionItem key={index}>
+            <ExhibitionImage src={exhibition.image} alt={exhibition.title} />
+            <ExhibitionContent>
+              <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
+              <ExhibitionDate>{exhibition.date}</ExhibitionDate>
+              <ExhibitionDescription>
+                {exhibition.description}
+              </ExhibitionDescription>
+            </ExhibitionContent>
+          </ExhibitionItem>
+        ))}
+      </ExhibitionsGrid>
+    </ExhibitionsSection>
+  );
+};
+
+export default Exhibitions;
+
+
+import React from "react";
+import styled from "styled-components";
+
+const FooterContainer = styled.footer`
+  background: #333;
+  color: white;
+  padding: 16px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
+`;
+
+const Footer = () => {
+  return (
+    <FooterContainer>
+      <p>Radom 2024 - {new Date().getFullYear()}.</p>
+    </FooterContainer>
+  );
+};
+
+export default Footer;
