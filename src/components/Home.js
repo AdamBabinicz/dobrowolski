@@ -114,7 +114,7 @@ const Home = () => {
         isOpen={isOpen}
         onClose={closeModal}
         header="Mistrz z Kresów"
-        content="Artysta regularnie wystawiał swoje prace, w tym olejne, akwarele, pastele i rysunki węglem, w okresie międzywojennym w Łodzi. Brał udział w wystawach swojej szkoły, działającej do 1939 roku, oraz w ekspozycjach Grupy Artystów Plastyków „Ryngraf”, którą założył w 1932 roku. Był znaną i cenioną postacią w lokalnym środowisku artystycznym, wystawiając także w Warszawie, Poznaniu i Krakowie. Jego propaństwowe poglądy znalazły wyraz w artykułach publikowanych w ogólnopolskim piśmie „Polska Druga”, którego był wydawcą i redaktorem w latach 30."
+        content="Artysta regularnie wystawiał swoje prace, w tym olejne, akwarele, pastele i rysunki węglem, w okresie międzywojennym w Łodzi. Brał udział w wystawach swojej szkoły, działającej do 1939 roku, oraz w ekspozycjach Grupy Artystów Plastyków „Ryngraf”, którą założył w 1932 roku. Był znaną i cenioną postacią w lokalnym środowisku artystycznym, wystawiając także w Warszawie, Poznaniu i Krakowie."
         imgSrc={img1}
       />
     </HomeContainer>
