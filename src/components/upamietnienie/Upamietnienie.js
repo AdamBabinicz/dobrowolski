@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Section from "./Section";
 import Button from "../Button";
@@ -14,7 +14,11 @@ const UpamietnieniePageContainer = styled.div`
   background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   padding: 20px;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 4rem;
+  }
 `;
 
 const Title = styled.h2`
@@ -39,7 +43,6 @@ const SectionsContainer = styled.div`
 
 const UpamietnieniePage = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const [click, setClick] = useState(false);
 
   return (
     <UpamietnieniePageContainer id="upamietnienie">

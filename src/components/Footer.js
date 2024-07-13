@@ -7,6 +7,7 @@ const FooterContainer = styled.footer`
   color: ${(props) => props.theme.footerColor};
   padding: 16px;
   text-align: center;
+  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
     padding: 8px;

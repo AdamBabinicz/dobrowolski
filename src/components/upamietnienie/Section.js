@@ -54,6 +54,10 @@ const Section = ({ title, text, image, alt, tooltipContent }) => {
     setShowTooltip(false);
   };
 
+  const handleTouchStart = () => {
+    setShowTooltip((prev) => !prev);
+  };
+
   return (
     <SectionContainer>
       <SectionImage src={image} alt={alt} />
@@ -62,6 +66,7 @@ const Section = ({ title, text, image, alt, tooltipContent }) => {
       <TooltipContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
       >
         <MdInfoOutline size={20} />
         {showTooltip && tooltipContent && <Tooltip content={tooltipContent} />}
