@@ -1,0 +1,1020 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { useSpring, animated } from "react-spring";
+import { useTheme } from "../ThemeContext";
+import img from "../assets/images/4.webp";
+
+const HeaderContainer = styled.header`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+
+  h1 {
+    font-size: 1.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const MobileMenu = styled(animated.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: ${(props) => props.theme.background};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+`;
+
+const MenuIcon = styled.div`
+  display: none;
+  cursor: pointer;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const NavLink = styled.a`
+  color: ${(props) => props.theme.color};
+  text-decoration: none;
+  font-size: 20px;
+  margin: 16px 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const ThemeToggle = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
+
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  // Definiujemy animację przy pomocy react-spring
+  const menuAnimation = useSpring({
+    transform: isOpen ? `translateX(0%)` : `translateX(-100%)`, // Przesuń menu w prawo, jeśli isOpen jest true
+    opacity: isOpen ? 1 : 0, // Ustaw opację na 1, jeśli isOpen jest true
+    config: { duration: 500 }, // Ustaw czas trwania animacji na 300ms
+  });
+
+  const handleMenuToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+      closeMenu();
+    }
+  };
+
+  return (
+    <HeaderContainer id="start">
+      <h1>Wacław Dobrowolski</h1>
+      <MenuIcon onClick={handleMenuToggle}>
+        {isOpen ? (
+          <FaTimes size={24} onClick={handleMenuToggle} />
+        ) : (
+          <FaBars size={24} onClick={handleMenuToggle} />
+        )}
+      </MenuIcon>
+      <Nav>
+        <NavLink href="#start" onClick={(e) => handleSmoothScroll(e, "start")}>
+          Start
+        </NavLink>
+        <NavLink
+          href="#biografia"
+          onClick={(e) => handleSmoothScroll(e, "biografia")}
+        >
+          Biografia
+        </NavLink>
+        <NavLink
+          href="#gallery-obrazy"
+          onClick={(e) => handleSmoothScroll(e, "gallery-obrazy")}
+        >
+          Obrazy
+        </NavLink>
+        <NavLink
+          href="#wystawy"
+          onClick={(e) => handleSmoothScroll(e, "wystawy")}
+        >
+          Wystawy
+        </NavLink>
+        <NavLink
+          href="#upamietnienie"
+          onClick={(e) => handleSmoothScroll(e, "upamietnienie")}
+        >
+          Upamiętnienie
+        </NavLink>
+        <ThemeToggle onClick={toggleTheme}>
+          {theme === "light" ? <FaMoon size={24} /> : <FaSun size={24} />}
+        </ThemeToggle>
+      </Nav>
+      <MobileMenu style={menuAnimation}>
+        <img src={img} alt="ryngraf" />
+        <NavLink href="#start" onClick={(e) => handleSmoothScroll(e, "start")}>
+          Start
+        </NavLink>
+        <NavLink
+          href="#biografia"
+          onClick={(e) => handleSmoothScroll(e, "biografia")}
+        >
+          Biografia
+        </NavLink>
+        <NavLink
+          href="#gallery-obrazy"
+          onClick={(e) => handleSmoothScroll(e, "gallery-obrazy")}
+        >
+          Obrazy
+        </NavLink>
+        <NavLink
+          href="#wystawy"
+          onClick={(e) => handleSmoothScroll(e, "wystawy")}
+        >
+          Wystawy
+        </NavLink>
+        <NavLink
+          href="#upamietnienie"
+          onClick={(e) => handleSmoothScroll(e, "upamietnienie")}
+        >
+          Upamiętnienie
+        </NavLink>
+        <ThemeToggle onClick={toggleTheme}>
+          {theme === "light" ? <FaMoon size={24} /> : <FaSun size={24} />}
+        </ThemeToggle>
+      </MobileMenu>
+    </HeaderContainer>
+  );
+};
+
+export default Header;
+
+
+
+import React, { useState } from "react";
+import styled from "styled-components";
+import img from "../assets/1.webp";
+import img1 from "../assets/images/1.jfif";
+import { FaBars } from "react-icons/fa";
+import Button from "./Button";
+import Modal from "./hooks/Modal";
+import useModal from "./hooks/useModal";
+
+const HomeContainer = styled.section`
+  text-align: center;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+
+  @media (min-width: 768px) {
+    margin: 0 auto;
+    padding: 64px;
+  }
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  div {
+    :last-child {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 1.3rem;
+  text-align: center;
+  text-wrap: balance;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    /* text-align: left; */
+  }
+`;
+
+const Description = styled.p`
+  margin-bottom: 16px;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+`;
+
+const Image = styled.img`
+  object-fit: cover;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 16px;
+
+  @media (min-width: 768px) {
+    max-width: 400px;
+    margin-left: 40px;
+    margin-top: 0;
+  }
+`;
+
+const IconContainer = styled.div`
+  display: none;
+
+  @media (max-width: 376px) {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+  }
+`;
+
+const Home = () => {
+  const { isOpen, openModal, closeModal } = useModal();
+  const [click, setClick] = useState(false);
+
+  return (
+    <HomeContainer>
+      <ContentContainer>
+        <div>
+          <Title>
+            „Jego talent był tęgi, rzetelny, świadomy swoich dróg i&nbsp;celów.”
+          </Title>
+          <Description>
+            Pochodzący z&nbsp;Kresów artysta, znany głównie z&nbsp;rysunków
+            i&nbsp;malarstwa, był wrogim krytykiem
+            <b> Władysława Strzemińskiego</b> (1893-1952) oraz zdecydowanym
+            przeciwnikiem przyznania twórcy unizmu Nagrody Artystycznej Miasta
+            Łodzi w&nbsp;1932 roku.
+          </Description>
+          <Description>
+            Tymczasem był to barwny i&nbsp;wszechstronny twórca zasłużony dla
+            rozwoju kulturalnego Łodzi w&nbsp;okresie międzywojennym, wręcz
+            nadający ton ówczesnemu życiu artystycznemu.
+            <br />
+            Jednak my skupiamy się teraz na okresie, kiedy artysta przebywał
+            w&nbsp;Radomiu.
+          </Description>
+          <Button label="Zobacz więcej" onClick={openModal} />
+        </div>
+        <Image src={img} alt="Artwork" />
+      </ContentContainer>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        header="Mistrz z Kresów"
+        content="Artysta regularnie wystawiał swoje prace, w tym olejne, akwarele, pastele i rysunki węglem, w okresie międzywojennym w Łodzi. Brał udział w wystawach swojej szkoły, działającej do 1939 roku, oraz w ekspozycjach Grupy Artystów Plastyków „Ryngraf”, którą założył w 1932 roku. Był znaną i cenioną postacią w lokalnym środowisku artystycznym, wystawiając także w Warszawie, Poznaniu i Krakowie."
+        imgSrc={img1}
+      />
+    </HomeContainer>
+  );
+};
+
+export default Home;
+
+
+
+import React from "react";
+import styled from "styled-components";
+
+// Importowanie lokalnych obrazów
+import img1 from "../assets/images/23.jpg";
+import img2 from "../assets/images/4.jfif";
+import img3 from "../assets/images/3.jfif";
+import img4 from "../assets/images/5.jfif";
+import img5 from "../assets/images/22.jpg";
+import img6 from "../assets/images/21.jpg";
+
+const ExhibitionsSection = styled.section`
+  padding: 32px;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+const Title = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+const ExhibitionsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ExhibitionItem = styled.div`
+  display: flex;
+  background-color: ${(props) => props.theme.background};
+  padding: 16px;
+  border-radius: 8px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const ExhibitionImage = styled.img`
+  /* flex: 1; */
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 16px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+`;
+
+const ExhibitionContent = styled.div`
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ExhibitionTitle = styled.h3`
+  margin-bottom: 8px;
+`;
+
+const ExhibitionDate = styled.p`
+  font-style: italic;
+  margin-bottom: 16px;
+`;
+
+const ExhibitionDescription = styled.p`
+  margin-bottom: 16px;
+`;
+
+const Exhibitions = () => {
+  const exhibitionsData = [
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1947",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego, - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img1,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1948",
+      description:
+        "Wystawa zbiorowa obrazów, szkiców i rysunków artysty malarza Wacława Dobrowolskiego - kontynuacja z 1947 r.",
+      image: img2,
+    },
+    {
+      title:
+        "35 lat pracy artystycznej : Wystawa zbiorowa Wacława Dobrowolskiego",
+      date: "1955",
+      description:
+        "Radom - wystawy - 1955 r.; Dobrowolski, Wacław (1890-1969) - katalogi wystaw; Malarstwo polskie - 20 w. - katalogi wystaw",
+      image: img3,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1967",
+      description:
+        "Wacław Dobrowolski - malarstwo - zorganizowana przez Związek Polskich Artystów Plastyków w Radomiu.",
+      image: img4,
+    },
+    {
+      title: "Wystawa czasowa",
+      date: "Radom - 1970",
+      description:
+        "Wacław Dobrowolski 1890-1969 - zorganizowana przez Towarzystwo Przyjaciół Sztuk Pięknych w Radomiu.",
+      image: img5,
+    },
+    {
+      title: "42 Salon Zimowy. Powrót",
+      date: "Radom - 28 lutego – 13 kwietnia 2009 r.",
+      description:
+        "Wystawę rozpoczynają prace dwojga artystów środowiska radomskiego, Wacława Dobrowolskiego i Haliny Krysińskiej, którzy byli założycielami Towarzystwa w 1945 r., uczestniczyli w wielu wystawach.",
+      image: img6,
+    },
+  ];
+
+  return (
+    <ExhibitionsSection id="wystawy">
+      <Title>Wystawy</Title>
+      <ExhibitionsGrid>
+        {exhibitionsData.map((exhibition, index) => (
+          <ExhibitionItem key={index}>
+            <ExhibitionImage src={exhibition.image} alt={exhibition.title} />
+            <ExhibitionContent>
+              <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
+              <ExhibitionDate>{exhibition.date}</ExhibitionDate>
+              <ExhibitionDescription>
+                {exhibition.description}
+              </ExhibitionDescription>
+            </ExhibitionContent>
+          </ExhibitionItem>
+        ))}
+      </ExhibitionsGrid>
+    </ExhibitionsSection>
+  );
+};
+
+export default Exhibitions;
+
+
+
+import React from "react";
+import Slider from "react-slick";
+import styled from "styled-components";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
+import image5 from "../assets/images/5.jpg";
+import image6 from "../assets/images/6.jpg";
+import image7 from "../assets/images/9.jpg";
+import image8 from "../assets/images/10.jpg";
+import image9 from "../assets/images/11.jpg";
+import image10 from "../assets/images/12.jpg";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const GalleryContainer = styled.section`
+  padding: 32px;
+  background: ${(props) => props.theme.background};
+  position: relative;
+  z-index: 0;
+`;
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+  gap: 2rem;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+`;
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  /* bottom: 0; */
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -90%);
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  @media (min-width: 768px) {
+    font-size: 0.8rem;
+    max-width: 100%;
+  }
+`;
+
+const ImageWrapperHover = styled(ImageWrapper)`
+  &:hover ${ImageOverlay} {
+    opacity: 1;
+    overflow: hidden;
+  }
+`;
+
+const NavigationButton = styled.button`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background 0.3s;
+
+  &:hover {
+    background: ${(props) => props.theme.hoverBackground};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  ${(props) => props.$left && "left: 16px;"}
+  ${(props) => props.$right && "right: 16px;"}
+
+  @media (max-width: 768px) {
+    ${(props) => props.$left && "left: 8px;"}
+    ${(props) => props.$right && "right: 8px;"}
+  }
+`;
+
+const CustomNextArrow = ({ onClick }) => (
+  <NavigationButton $right onClick={onClick}>
+    <FaArrowRight />
+  </NavigationButton>
+);
+
+const CustomPrevArrow = ({ onClick }) => (
+  <NavigationButton $left onClick={onClick}>
+    <FaArrowLeft />
+  </NavigationButton>
+);
+
+const Gallery = () => {
+  const images = [
+    { src: image1, title: "Snopki", year: "1958" },
+    { src: image2, title: "Zamyślona", year: "1947" },
+    { src: image3, title: "Portret chłopca", year: "1933" },
+    { src: image4, title: "Marina na Capri", year: "1928" },
+    { src: image5, title: "Pejzaż z rzeką", year: "?" },
+    { src: image6, title: "Polna droga", year: "?" },
+    { src: image7, title: "Portret pani", year: "1929" },
+    { src: image8, title: "Portret mężczyzny w garniturze", year: "1937" },
+    { src: image9, title: "Portret Bolesława Bończyka", year: "1937" },
+    { src: image10, title: "Portret Czesławy Bończyk", year: "1937" },
+  ];
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  return (
+    <GalleryContainer id="gallery-obrazy">
+      <Title>Obrazy</Title>
+      <Slider {...settings}>
+        {images.map((image, index) => (
+          <ImageWrapperHover key={index}>
+            <Image src={image.src} alt={`Artwork ${index + 1}`} />
+            <ImageOverlay>
+              {image.title} - {image.year}
+            </ImageOverlay>
+          </ImageWrapperHover>
+        ))}
+      </Slider>
+    </GalleryContainer>
+  );
+};
+
+export default Gallery;
+
+
+
+import React from "react";
+import styled from "styled-components";
+
+const BiographySection = styled.section`
+  padding: 32px;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+const Title = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const Biography = () => {
+  return (
+    <BiographySection id="biografia">
+      <Title>Biografia</Title>
+      <p>
+        Syn Heliodora, w wieku siedmiu lat przeniósł się do Kijowa. Tam ukończył
+        szkołę realną, a następnie rozpoczął studia architektoniczne w Szkole
+        Sztuk Pięknych. Po roku zmienił kierunek na malarstwo, ucząc się pod
+        okiem takich mistrzów jak Iwan Fedorowicz Selezniow, Grigorij Kononowicz
+        Diadczenko, Muraszko i Menek. W 1912 roku ukończył studia, zdobywając
+        uprawnienia do nauczania rysunku i grafiki w szkołach średnich. Jesienią
+        tego samego roku kontynuował naukę na Akademii Sztuk Pięknych w
+        Petersburgu, gdzie studiował u znakomitych profesorów: Konstantina
+        Makowskiego, Jana Ciąglińskiego, Iwana Iwanowicza Tworożnkowa,
+        Biełajewa, Dymitra Nikołajewicza Kardowskiego i Wasilija Sawińskiego.
+      </p>
+      <p>
+        Od 1920 roku jego prace można było podziwiać na wystawach w Kijowie i
+        Leningradzie. W 1922 roku przeniósł się do Moskwy, gdzie przez dwa lata
+        pracował jako plastyk. Po powrocie do Kijowa w 1924 roku ukończył studia
+        i zdobył dyplom artysty malarza. Został wtedy członkiem Związku
+        Zawodowego Pracowników Sztuki i zaczął pracować jako ilustrator
+        czasopism. W 1927 roku wyruszył w podróż po Europie, spędzając kilka
+        miesięcy we Włoszech, gdzie stworzył kolekcję około stu grafik. Rok
+        później osiedlił się w Łodzi, współtworząc tam Szkołę Sztuk Pięknych,
+        która w 1937 roku została przemianowana na Szkołę Sztuk Pięknych i
+        Przemysłu Artystycznego im. Cypriana Kamila Norwida. Wystawiał swoje
+        prace w Łodzi, warszawskim Instytucie Propagandy Sztuki i Zachęcie. W
+        1940 roku został wysiedlony do Limanowej, skąd przeniósł się do Radomia,
+        gdzie zarabiał na życie malowaniem portretów i udzielaniem prywatnych
+        lekcji.
+      </p>
+      <p>
+        W 1945 założył szkołę plastyczną, która cztery lata później stała się
+        Państwowym Ogniskiem Plastycznym. Również w 1945 zainicjował powstanie
+        radomskiego oddziału Towarzystwa Przyjaciół Sztuk Pięknych, za co został
+        wynagrodzonym medalem. Był również pierwszym prezesem Związku
+        Pracowników Sztuki w Radomiu oraz organizatorem Klubu
+        Literacko-Artystycznego. Był wyjątkowo zasłużony dla rozwoju środowiska
+        artystycznego w mieście, które wcześniej nie posiadało takich tradycji.
+        Wielu uczniów Wacława Dobrowolskiego ukończyło Akademie Sztuk Pięknych i
+        zostało zawodowymi malarzami, należeli do nich m.in. Alojzy Balcerzak,
+        Władysław Kurpiel, Krystyna Krause. Lekcje rysunku pobierał również
+        Andrzej Wajda i Adam Gierczak - autor strony.
+      </p>
+    </BiographySection>
+  );
+};
+
+export default Biography;
+
+
+
+import React from "react";
+import styled from "styled-components";
+import Section from "./Section";
+import Button from "../Button";
+import image1 from "../../assets/images/13.jpg";
+import image2 from "../../assets/images/5.webp";
+import image3 from "../../assets/images/14.jpg";
+import image4 from "../../assets/images/6.webp";
+import Modal from "../hooks/Modal";
+import useModal from "../hooks/useModal";
+import img from "../../assets/images/2.png";
+
+const UpamietnieniePageContainer = styled.div`
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  padding: 20px;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 4rem;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const SectionsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const UpamietnieniePage = () => {
+  const { isOpen, openModal, closeModal } = useModal();
+
+  return (
+    <UpamietnieniePageContainer id="upamietnienie">
+      <Title>Upamiętnienie</Title>
+      <SectionsContainer>
+        <Section
+          title="Ulica Wacława Dobrowolskiego"
+          text="Ulica Wacława Dobrowolskiego prowadzi od ul. T. Grodzińskiej do ul. Rodziny Graboszów. Krzyżuje się z ul. J. Prackiego. (Rajec Szlachecki)"
+          image={image1}
+          alt="Rajec Szlachecki"
+          tooltipContent="Nazwa ulicy została nadana uchwałą Rady Miejskiej z 24 listopada 2008 r."
+        />
+        <Section
+          title="Wacław Dobrowolski w latach 30-tych założył w Łodzi Grupę Artystyczną Ryngraf"
+          text="Uroczystość odbyła się przy ul. Wólczańskiej 35. Adres wybrano nieprzypadkowo - w tym właśnie miejscu w latach dwudziestych XX wieku malarz i rysownik zasłużony dla rozwoju kulturalnego Łodzi, założył szkołę dla przyszłych artystów."
+          image={image2}
+          alt="Tablice"
+          tooltipContent="Uroczystości odsłonięcia tablicy pamiątkowej Wacława Dobrowolskiego (1890–1969)
+w Łodzi przy ul. Wólczańskiej 35. W tym
+miejscu, w 1929 r. Dobrowolski założył
+Szkołę Rysunku, Malarstwa, Rzeźby
+i Przemysłu Artystycznego im. Cypriana
+Kamila Norwida, która działała do 1938
+roku, a następnie przy ul. Piotrkowskiej 84
+(aż do wybuchu II wojny światowej)."
+        />
+        <Section
+          title="1 września 2015r., w 125-tą rocznicę urodzin i 45-tą rocznicę śmierci Wacława Dobrowolskiego, założyciela szkoły"
+          text="Na uroczystość przybyli wyjątkowi goście, min.: syn i wnuk Wacława Dobrowolskiego oraz polski grafik, malarz, artysta plastyk, popularyzator sztuki i wykładowca Alojzy Balcerzak, którzy odsłonili pamiątkową tablicę zaprojektowaną przez artystę i pedagoga radomskiego 'Plastyka' - Włodzimierza Orła. "
+          image={image3}
+          alt="Tablice"
+          tooltipContent="Tablica upamiętniająca profesora Wacława Dobrowolskiego znajduje się na budynku Zespołu Szkół Plastycznych im. Józefa Brandta w Radomiu."
+        />
+        <Section
+          title="Pomniki"
+          text="Profesor Dobrowolski jest pochowany w Bodzanowie koło Płocka."
+          image={image4}
+          alt="Pomniki"
+          tooltipContent="Wiadomość niepotwierdzona."
+        />
+      </SectionsContainer>
+
+      <Button label="Zobacz więcej" onClick={openModal} />
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        header="Portret z przeszłości"
+        content="Zofia Kaczkowska-Waliszewska: 'To jedna z niewielu pamiątek, które przetrwały wojnę - ten portret, sukienka, w której pozowałam, fortepian i... żyrandol. Patrząc na obraz z mojego dzieciństwa sprzed 81 lat, przenoszę się do tamtych szczęśliwych, niewinnych czasów, zanim wybuchła wojna i wszystko się zmieniło.'"
+        imgSrc={img}
+      />
+    </UpamietnieniePageContainer>
+  );
+};
+
+export default UpamietnieniePage;
+
+
+
+import React, { useState } from "react";
+import styled from "styled-components";
+import Tooltip from "./Tooltip";
+import { MdInfoOutline } from "react-icons/md";
+
+const SectionContainer = styled.div`
+  background: ${(props) => props.theme.sectionBackground};
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+`;
+
+const SectionImage = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+  }
+`;
+
+const SectionTitle = styled.h3`
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: ${(props) => props.theme.sectionTitleColor};
+
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+  }
+`;
+
+const SectionText = styled.p`
+  margin-bottom: 16px;
+`;
+
+const TooltipContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const Section = ({ title, text, image, alt, tooltipContent }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
+  };
+
+  const handleTouchStart = () => {
+    setShowTooltip((prev) => !prev);
+  };
+
+  return (
+    <SectionContainer>
+      <SectionImage src={image} alt={alt} />
+      <SectionTitle>{title}</SectionTitle>
+      <SectionText>{text}</SectionText>
+      <TooltipContainer
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+      >
+        <MdInfoOutline size={30} />
+        {showTooltip && tooltipContent && <Tooltip content={tooltipContent} />}
+      </TooltipContainer>
+    </SectionContainer>
+  );
+};
+
+export default Section;
+
+
+
+// Footer.js
+import React from "react";
+import styled from "styled-components";
+
+const FooterContainer = styled.footer`
+  background: ${(props) => props.theme.footerBackground};
+  color: ${(props) => props.theme.footerColor};
+  padding: 16px;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
+`;
+
+const Footer = () => {
+  return (
+    <FooterContainer>
+      <p>Radom 2024 - {new Date().getFullYear()}.</p>
+    </FooterContainer>
+  );
+};
+
+export default Footer;
+
+
+
+import React, { createContext, useState, useContext } from "react";
+import {
+  createGlobalStyle,
+  ThemeProvider as StyledThemeProvider,
+} from "styled-components";
+
+const ThemeContext = createContext();
+
+export const useTheme = () => useContext(ThemeContext);
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+`;
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <StyledThemeProvider
+        theme={{
+          mode: theme,
+          sectionBackground: theme === "dark" ? "#222" : "#f0f0f0",
+          sectionTextColor: theme === "dark" ? "#fff" : "#333",
+          tooltipBackground: theme === "dark" ? "#222" : "#f0f0f0",
+          buttonHoverBackground: "#0056b3",
+          buttonHoverText: "#fff",
+        }}
+      >
+        <GlobalStyle />
+        {children}
+      </StyledThemeProvider>
+    </ThemeContext.Provider>
+  );
+};
+

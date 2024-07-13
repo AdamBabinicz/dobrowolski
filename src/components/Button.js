@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const StyledButton = styled.button`
+const StyledButton = styled(motion.button)`
   background: ${(props) => props.theme.buttonBackground};
   color: ${(props) => props.theme.buttonText};
   font-size: 1rem;
@@ -9,17 +10,22 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
   margin-top: 2rem;
-
-  &:hover {
-    background: ${(props) => props.theme.buttonHoverBackground};
-    color: ${(props) => props.theme.buttonHoverText};
-  }
 `;
 
 const Button = ({ label, onClick }) => {
-  return <StyledButton onClick={onClick}>{label}</StyledButton>;
+  return (
+    <StyledButton
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={onClick}
+    >
+      {label}
+    </StyledButton>
+  );
 };
 
 export default Button;
