@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import img from "../assets/1.webp";
 import img1 from "../assets/images/1.jfif";
-import { FaBars } from "react-icons/fa";
+import { motion } from "framer-motion";
 import Button from "./Button";
 import Modal from "./hooks/Modal";
 import useModal from "./hooks/useModal";
@@ -41,7 +41,7 @@ const ContentContainer = styled.div`
   }
 `;
 
-const Title = styled.h2`
+const Title = styled(motion.h2)`
   font-size: 1.3rem;
   text-align: center;
   text-wrap: balance;
@@ -50,11 +50,10 @@ const Title = styled.h2`
   @media (min-width: 768px) {
     font-size: 2rem;
     margin-bottom: 16px;
-    /* text-align: left; */
   }
 `;
 
-const Description = styled.p`
+const Description = styled(motion.p)`
   margin-bottom: 16px;
   text-align: left;
 
@@ -64,7 +63,7 @@ const Description = styled.p`
   }
 `;
 
-const Image = styled.img`
+const Image = styled(motion.img)`
   object-fit: cover;
   width: 100%;
   max-width: 300px;
@@ -91,23 +90,34 @@ const IconContainer = styled.div`
 
 const Home = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const [click, setClick] = useState(false);
 
   return (
-    <HomeContainer>
+    <HomeContainer id="start">
       <ContentContainer>
         <div>
-          <Title>
+          <Title
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             „Jego talent był tęgi, rzetelny, świadomy swoich dróg i&nbsp;celów.”
           </Title>
-          <Description>
+          <Description
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             Pochodzący z&nbsp;Kresów artysta, znany głównie z&nbsp;rysunków
             i&nbsp;malarstwa, był wrogim krytykiem
             <b> Władysława Strzemińskiego</b> (1893-1952) oraz zdecydowanym
             przeciwnikiem przyznania twórcy unizmu Nagrody Artystycznej Miasta
             Łodzi w&nbsp;1932 roku.
           </Description>
-          <Description>
+          <Description
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             Tymczasem był to barwny i&nbsp;wszechstronny twórca zasłużony dla
             rozwoju kulturalnego Łodzi w&nbsp;okresie międzywojennym, wręcz
             nadający ton ówczesnemu życiu artystycznemu.
@@ -117,7 +127,13 @@ const Home = () => {
           </Description>
           <Button label="Zobacz więcej" onClick={openModal} />
         </div>
-        <Image src={img} alt="Artwork" />
+        <Image
+          src={img}
+          alt="Artwork"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        />
       </ContentContainer>
       <Modal
         isOpen={isOpen}

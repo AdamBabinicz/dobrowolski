@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { motion, useAnimation } from "framer-motion";
 
 const BiographySection = styled.section`
   padding: 32px;
@@ -21,6 +22,7 @@ const BiographySection = styled.section`
     padding: 16px;
   }
 `;
+
 const Title = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 16px;
@@ -31,11 +33,42 @@ const Title = styled.h2`
   }
 `;
 
+const AnimatedParagraph = styled(motion.p)`
+  margin-bottom: 16px;
+  text-align: left;
+`;
+
 const Biography = () => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const biographySection = document.getElementById("biografia");
+
+      if (biographySection && scrollPosition > biographySection.offsetTop) {
+        controls.start("visible");
+      } else {
+        controls.start("hidden");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   return (
     <BiographySection id="biografia">
       <Title>Biografia</Title>
-      <p>
+      <AnimatedParagraph
+        initial={{ opacity: 0, y: -50 }}
+        animate={controls}
+        variants={{
+          visible: { opacity: 1, y: 0 },
+          hidden: { opacity: 0, y: 20 },
+        }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         Syn Heliodora, w wieku siedmiu lat przeniósł się do Kijowa. Tam ukończył
         szkołę realną, a następnie rozpoczął studia architektoniczne w Szkole
         Sztuk Pięknych. Po roku zmienił kierunek na malarstwo, ucząc się pod
@@ -46,8 +79,16 @@ const Biography = () => {
         Petersburgu, gdzie studiował u znakomitych profesorów: Konstantina
         Makowskiego, Jana Ciąglińskiego, Iwana Iwanowicza Tworożnkowa,
         Biełajewa, Dymitra Nikołajewicza Kardowskiego i Wasilija Sawińskiego.
-      </p>
-      <p>
+      </AnimatedParagraph>
+      <AnimatedParagraph
+        initial={{ opacity: 0, y: -50 }}
+        animate={controls}
+        variants={{
+          visible: { opacity: 1, y: 0 },
+          hidden: { opacity: 0, y: 20 },
+        }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         Od 1920 roku jego prace można było podziwiać na wystawach w Kijowie i
         Leningradzie. W 1922 roku przeniósł się do Moskwy, gdzie przez dwa lata
         pracował jako plastyk. Po powrocie do Kijowa w 1924 roku ukończył studia
@@ -62,8 +103,16 @@ const Biography = () => {
         1940 roku został wysiedlony do Limanowej, skąd przeniósł się do Radomia,
         gdzie zarabiał na życie malowaniem portretów i udzielaniem prywatnych
         lekcji.
-      </p>
-      <p>
+      </AnimatedParagraph>
+      <AnimatedParagraph
+        initial={{ opacity: 0, y: -50 }}
+        animate={controls}
+        variants={{
+          visible: { opacity: 1, y: 0 },
+          hidden: { opacity: 0, y: 20 },
+        }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
         W 1945 założył szkołę plastyczną, która cztery lata później stała się
         Państwowym Ogniskiem Plastycznym. Również w 1945 zainicjował powstanie
         radomskiego oddziału Towarzystwa Przyjaciół Sztuk Pięknych, za co został
@@ -75,7 +124,7 @@ const Biography = () => {
         zostało zawodowymi malarzami, należeli do nich m.in. Alojzy Balcerzak,
         Władysław Kurpiel, Krystyna Krause. Lekcje rysunku pobierał również
         Andrzej Wajda i Adam Gierczak - autor strony.
-      </p>
+      </AnimatedParagraph>
     </BiographySection>
   );
 };

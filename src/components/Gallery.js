@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -12,6 +12,7 @@ import image7 from "../assets/images/9.jpg";
 import image8 from "../assets/images/10.jpg";
 import image9 from "../assets/images/11.jpg";
 import image10 from "../assets/images/12.jpg";
+import { motion, useAnimation } from "framer-motion";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,6 +22,10 @@ const GalleryContainer = styled.section`
   background: ${(props) => props.theme.background};
   position: relative;
   z-index: 0;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 `;
 
 const Title = styled.h2`
@@ -56,9 +61,8 @@ const Image = styled.img`
   }
 `;
 
-const ImageOverlay = styled.div`
+const ImageOverlay = styled(motion.div)`
   position: absolute;
-  /* bottom: 0; */
   top: 90%;
   left: 50%;
   transform: translate(-50%, -90%);
@@ -143,6 +147,28 @@ const Gallery = () => {
     { src: image10, title: "Portret Czesławy Bończyk", year: "1937" },
   ];
 
+  const [isHovered, setIsHovered] = useState(false);
+  const controls = useAnimation();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const gallerySection = document.getElementById("gallery-obrazy");
+
+      if (gallerySection && scrollPosition > gallerySection.offsetTop) {
+        controls.start("visible");
+        setIsVisible(true);
+      } else {
+        controls.start("hidden");
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -174,9 +200,27 @@ const Gallery = () => {
       <Title>Obrazy</Title>
       <Slider {...settings}>
         {images.map((image, index) => (
-          <ImageWrapperHover key={index}>
-            <Image src={image.src} alt={`Artwork ${index + 1}`} />
-            <ImageOverlay>
+          <ImageWrapperHover
+            key={index}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <Image
+              src={image.src}
+              alt={`Artwork ${index + 1}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={
+                isVisible && isHovered
+                  ? { opacity: 1, scale: 1 }
+                  : { opacity: 0, scale: 0.9 }
+              }
+              transition={{ duration: 0.6, delay: 0.2 }}
+            />
+            <ImageOverlay
+              initial={{ opacity: 0 }}
+              animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               {image.title} - {image.year}
             </ImageOverlay>
           </ImageWrapperHover>

@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Tooltip from "./Tooltip";
 import { MdInfoOutline } from "react-icons/md";
+import { motion, useAnimation } from "framer-motion";
 
-const SectionContainer = styled.div`
+const SectionContainer = styled(motion.div)`
   background: ${(props) => props.theme.sectionBackground};
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+
+  @media (min-width: 768px) {
+    height: 650px;
+  }
 `;
 
 const SectionImage = styled.img`
@@ -20,7 +25,6 @@ const SectionImage = styled.img`
   @media (min-width: 768px) {
     object-fit: cover;
     height: 400px;
-    width: 100%;
   }
 `;
 
@@ -45,6 +49,23 @@ const TooltipContainer = styled.div`
 
 const Section = ({ title, text, image, alt, tooltipContent }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const exhibitionsSection = document.getElementById("wystawy");
+
+      if (exhibitionsSection && scrollPosition > exhibitionsSection.offsetTop) {
+        controls.start("visible");
+      } else {
+        controls.start("hidden");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
 
   const handleMouseEnter = () => {
     setShowTooltip(true);
@@ -59,7 +80,15 @@ const Section = ({ title, text, image, alt, tooltipContent }) => {
   };
 
   return (
-    <SectionContainer>
+    <SectionContainer
+      initial={{ opacity: 0, y: 20 }}
+      animate={controls}
+      variants={{
+        visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: 20 },
+      }}
+      whileHover={{ scale: 1.05 }}
+    >
       <SectionImage src={image} alt={alt} />
       <SectionTitle>{title}</SectionTitle>
       <SectionText>{text}</SectionText>

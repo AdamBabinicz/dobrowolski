@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { motion, useAnimation } from "framer-motion";
 
 // Importowanie lokalnych obrazów
 import img1 from "../assets/images/23.jpg";
@@ -18,6 +19,7 @@ const ExhibitionsSection = styled.section`
     padding: 16px;
   }
 `;
+
 const Title = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 16px;
@@ -27,44 +29,46 @@ const Title = styled.h2`
     font-size: 2.5rem;
   }
 `;
+
 const ExhibitionsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 `;
 
-const ExhibitionItem = styled.div`
+const ExhibitionItem = styled(motion.div)`
   display: flex;
   background-color: ${(props) => props.theme.background};
   padding: 16px;
   border-radius: 8px;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
-const ExhibitionImage = styled.img`
-  /* flex: 1; */
-  width: 100%;
-  height: auto;
+const ExhibitionImage = styled(motion.img)`
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 16px;
+  margin-right: 16px;
 
-  @media (min-width: 768px) {
-    margin-bottom: 0;
-    margin-right: 16px;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 16px;
+    width: 100%;
+    height: auto;
   }
 `;
 
 const ExhibitionContent = styled.div`
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
 `;
@@ -75,11 +79,11 @@ const ExhibitionTitle = styled.h3`
 
 const ExhibitionDate = styled.p`
   font-style: italic;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 const ExhibitionDescription = styled.p`
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 const Exhibitions = () => {
@@ -129,13 +133,44 @@ const Exhibitions = () => {
     },
   ];
 
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const exhibitionsSection = document.getElementById("wystawy");
+
+      if (exhibitionsSection && scrollPosition > exhibitionsSection.offsetTop) {
+        controls.start("visible");
+      } else {
+        controls.start("hidden");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
+
   return (
     <ExhibitionsSection id="wystawy">
       <Title>Wystawy</Title>
       <ExhibitionsGrid>
         {exhibitionsData.map((exhibition, index) => (
-          <ExhibitionItem key={index}>
-            <ExhibitionImage src={exhibition.image} alt={exhibition.title} />
+          <ExhibitionItem
+            key={index}
+            initial="hidden"
+            animate={controls}
+            variants={{
+              visible: { opacity: 1, y: 0 },
+              hidden: { opacity: 0, y: 20 },
+            }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+          >
+            <ExhibitionImage
+              src={exhibition.image}
+              alt={exhibition.title}
+              whileHover={{ scale: 1.05 }}
+            />
             <ExhibitionContent>
               <ExhibitionTitle>{exhibition.title}</ExhibitionTitle>
               <ExhibitionDate>{exhibition.date}</ExhibitionDate>
