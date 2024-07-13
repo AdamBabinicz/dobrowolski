@@ -90,3 +90,5 @@ export default App;
 // https://www.szukajwarchiwach.gov.pl/en/web/guest/seria?p_p_id=Seria&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&refererPlid=2144199&_Seria_delta=60&_Seria_nameofjsp=jednostki&_Seria_resetCur=false&_Seria_id_serii=302580&_Seria_cur=45
 
 // https://www.sda.pl/files/auctions_files/347/katalog.pdf
+
+// wb.dobro@gmail.com
