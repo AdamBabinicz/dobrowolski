@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 const BiographySection = styled.section`
   padding: 32px;
-  background-color: ${(props) => props.theme.background};
+  background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.color};
 
   p {
     font-size: 1.1rem;
+    margin-bottom: 0.7rem;
 
     @media (min-width: 768px) {
       font-size: 1.2rem;
@@ -21,9 +22,13 @@ const BiographySection = styled.section`
   }
 `;
 const Title = styled.h2`
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   margin-bottom: 16px;
   color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Biography = () => {

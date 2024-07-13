@@ -20,12 +20,17 @@ const GalleryContainer = styled.section`
   padding: 32px;
   background: ${(props) => props.theme.background};
   position: relative;
+  z-index: 0;
 `;
 
 const Title = styled.h2`
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   margin-bottom: 16px;
   color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const ImageWrapper = styled.div`

@@ -27,6 +27,13 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
+  div {
+    :last-child {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
@@ -35,8 +42,10 @@ const ContentContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   text-align: center;
+  text-wrap: balance;
+  margin-bottom: 1rem;
 
   @media (min-width: 768px) {
     font-size: 2rem;

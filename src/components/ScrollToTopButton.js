@@ -10,7 +10,7 @@ const ScrollButton = styled.button`
   height: 50px;
   border: none;
   border-radius: 50%;
-  background-color: ${(props) => props.theme.color};
+  background: ${(props) => props.theme.color};
   color: ${(props) => props.theme.background};
   cursor: pointer;
   display: flex;
@@ -19,9 +19,10 @@ const ScrollButton = styled.button`
   opacity: ${(props) => (props.$show ? "1" : "0")};
   visibility: ${(props) => (props.$show ? "visible" : "hidden")};
   transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1;
 
   &:hover {
-    background-color: ${(props) => props.theme.color};
+    background: ${(props) => props.theme.color};
     color: ${(props) => props.theme.background};
     box-shadow: 0 0 10px ${(props) => props.theme.color};
   }

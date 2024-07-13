@@ -12,8 +12,15 @@ const HeaderContainer = styled.header`
   align-items: center;
   padding: 16px;
 
+  h1 {
+    font-size: 1.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+  }
   @media (max-width: 768px) {
-    padding: 8px;
+    padding: 20px;
   }
 `;
 

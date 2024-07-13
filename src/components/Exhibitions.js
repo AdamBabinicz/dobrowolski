@@ -19,14 +19,17 @@ const ExhibitionsSection = styled.section`
   }
 `;
 const Title = styled.h2`
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   margin-bottom: 16px;
   color: ${(props) => props.theme.color};
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 const ExhibitionsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
