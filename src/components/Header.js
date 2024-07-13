@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
 import { useTheme } from "../ThemeContext";
+import img from "../assets/images/4.webp";
 
 const HeaderContainer = styled.header`
   background: ${(props) => props.theme.background};
@@ -45,6 +46,12 @@ const MobileMenu = styled(animated.div)`
   align-items: center;
   justify-content: center;
   z-index: 5;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
 `;
 
 const MenuIcon = styled.div`
@@ -145,6 +152,7 @@ const Header = () => {
         </ThemeToggle>
       </Nav>
       <MobileMenu style={menuAnimation}>
+        <img src={img} alt="ryngraf" />
         <NavLink href="#start" onClick={(e) => handleSmoothScroll(e, "start")}>
           Start
         </NavLink>
