@@ -68,7 +68,7 @@ const Section = ({ title, text, image, alt, tooltipContent }) => {
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
       >
-        <MdInfoOutline size={20} />
+        <MdInfoOutline size={30} />
         {showTooltip && tooltipContent && <Tooltip content={tooltipContent} />}
       </TooltipContainer>
     </SectionContainer>
