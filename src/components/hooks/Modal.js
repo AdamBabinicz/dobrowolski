@@ -42,7 +42,7 @@ const ModalContent = styled.p`
 const ModalImage = styled.img`
   max-width: 100%;
   border-radius: 8px;
-  max-height: 300px;
+  max-height: 280px;
   display: block;
   margin: auto;
 
