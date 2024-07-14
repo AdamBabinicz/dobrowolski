@@ -6,14 +6,14 @@ const TooltipContainer = styled(animated.div)`
   position: absolute;
   background: ${(props) => props.theme.tooltipBackground};
   color: ${(props) => props.theme.tooltipText};
-  padding: 12px 16px; /* większy padding */
-  border-radius: 8px; /* zaokrąglone rogi */
+  padding: 12px 16px;
+  border-radius: 8px;
   box-shadow: ${(props) =>
     props.theme.mode === "dark"
       ? "0 2px 8px rgba(255, 255, 255, 0.6)" // Cień dla motywu dark
       : "0 2px 8px rgba(0, 0, 0, 0.2)"}; // Cień dla motywu light
   z-index: 9999;
-  width: 250px; /* Szerokość tooltipa */
+  width: 250px;
 
   @media (min-width: 768px) {
     width: 300px;
