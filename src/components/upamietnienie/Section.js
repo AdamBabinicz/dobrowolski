@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Tooltip from "./Tooltip";
 import { MdInfoOutline } from "react-icons/md";
-import { motion, useAnimation } from "framer-motion";
 
-const SectionContainer = styled(motion.div)`
+const SectionContainer = styled.div`
   background: ${(props) => props.theme.sectionBackground};
   padding: 20px;
   border-radius: 8px;
@@ -32,74 +31,44 @@ const SectionTitle = styled.h3`
   font-size: 1.2rem;
   margin-bottom: 8px;
   color: ${(props) => props.theme.sectionTitleColor};
-
-  @media (min-width: 768px) {
-    font-size: 1.3rem;
-  }
 `;
 
 const SectionText = styled.p`
   margin-bottom: 16px;
 `;
 
-const TooltipContainer = styled.div`
+const TooltipWrapper = styled.div`
   position: relative;
   display: inline-block;
 `;
 
-const Section = ({ title, text, image, alt, tooltipContent }) => {
+const TooltipIcon = styled(MdInfoOutline)`
+  cursor: pointer;
+`;
+
+const Section = ({ title, text, image, alt, tooltipContent, iconPosition }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const controls = useAnimation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight;
-      const exhibitionsSection = document.getElementById("wystawy");
-
-      if (exhibitionsSection && scrollPosition > exhibitionsSection.offsetTop) {
-        controls.start("visible");
-      } else {
-        controls.start("hidden");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [controls]);
-
-  const handleMouseEnter = () => {
-    setShowTooltip(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowTooltip(false);
-  };
-
-  const handleTouchStart = () => {
-    setShowTooltip((prev) => !prev);
-  };
+  const iconRef = useRef(null);
 
   return (
-    <SectionContainer
-      initial={{ opacity: 0, y: 20 }}
-      animate={controls}
-      variants={{
-        visible: { opacity: 1, y: 0 },
-        hidden: { opacity: 0, y: 20 },
-      }}
-      whileHover={{ scale: 1.05 }}
-    >
+    <SectionContainer>
       <SectionImage src={image} alt={alt} />
       <SectionTitle>{title}</SectionTitle>
       <SectionText>{text}</SectionText>
-      <TooltipContainer
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
+      <TooltipWrapper
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+        ref={iconRef}
       >
-        <MdInfoOutline size={30} />
-        {showTooltip && tooltipContent && <Tooltip content={tooltipContent} />}
-      </TooltipContainer>
+        <TooltipIcon size={24} />
+        {showTooltip && (
+          <Tooltip
+            content={tooltipContent}
+            iconPosition={iconPosition}
+            parentRef={iconRef}
+          />
+        )}
+      </TooltipWrapper>
     </SectionContainer>
   );
 };

@@ -70,7 +70,7 @@ const UpamietnieniePage = () => {
       <Title>Upamiętnienie</Title>
       <SectionsContainer>
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
+          initial="hidden"
           animate={controls}
           variants={{
             visible: { opacity: 1, y: 0 },
@@ -88,7 +88,7 @@ const UpamietnieniePage = () => {
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
+          initial="hidden"
           animate={controls}
           variants={{
             visible: { opacity: 1, y: 0 },
@@ -106,7 +106,7 @@ const UpamietnieniePage = () => {
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
+          initial="hidden"
           animate={controls}
           variants={{
             visible: { opacity: 1, y: 0 },
@@ -124,7 +124,7 @@ const UpamietnieniePage = () => {
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
+          initial="hidden"
           animate={controls}
           variants={{
             visible: { opacity: 1, y: 0 },

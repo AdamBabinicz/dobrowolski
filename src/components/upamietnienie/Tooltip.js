@@ -17,13 +17,14 @@ const TooltipContainer = styled(animated.div)`
 
   @media (min-width: 768px) {
     width: 300px;
+    z-index: 9999;
   }
 `;
 
 const Tooltip = ({ content }) => {
   const tooltipAnimation = useSpring({
     opacity: 1,
-    transform: "translateY(-10px)",
+    transform: "translateY(-5px)",
     config: { tension: 300, friction: 20 },
   });
 
