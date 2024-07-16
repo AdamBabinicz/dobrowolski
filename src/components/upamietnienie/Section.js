@@ -11,7 +11,7 @@ const SectionContainer = styled.div`
   position: relative;
 
   @media (min-width: 768px) {
-    height: 650px;
+    height: 630px;
   }
 `;
 
